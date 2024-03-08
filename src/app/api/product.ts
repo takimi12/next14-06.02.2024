@@ -5,6 +5,7 @@ import {
 	ProductGetReviewsByIdDocument,
 	ProductGetSimilarDocument,
 	ProductsByNameDocument,
+	ProductsGetAllPaginatedAscDocument,
 	ProductsGetAllPaginatedDocument,
 	ReviewAddDocument,
 	ReviewPublushAddDocument,
@@ -74,9 +75,14 @@ export const getProductsPaginated = async (page: number) => {
 	return products;
 };
 
-export const getAllProductsPaginated = (currentPage: number, perPage: number) => {
+export const getAllProductsPaginated = (currentPage: number, perPage: number, sortOrder:string) => {
 	const skip = (currentPage - 1) * perPage;
-	return executeGraphql(ProductsGetAllPaginatedDocument, { skip, first: perPage });
+	if(sortOrder==="asc"){
+		return executeGraphql(ProductsGetAllPaginatedAscDocument, { skip, first: perPage });
+	}else{
+		//"desc"
+		return executeGraphql(ProductsGetAllPaginatedDocument, { skip, first: perPage });
+	}
 };
 
 export const getProduct = (id: string) => {

@@ -10793,6 +10793,14 @@ export type ProductsGetAllPaginatedQueryVariables = Exact<{
 
 export type ProductsGetAllPaginatedQuery = { products: Array<{ id: string, name: string, price: number, description: string, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type ProductsGetAllPaginatedAscQueryVariables = Exact<{
+  skip: Scalars['Int']['input'];
+  first: Scalars['Int']['input'];
+}>;
+
+
+export type ProductsGetAllPaginatedAscQuery = { products: Array<{ id: string, name: string, price: number, description: string, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ProductsByNameQueryVariables = Exact<{
   name: Scalars['String']['input'];
 }>;
@@ -10946,7 +10954,7 @@ export const GetSingleProductDocument = new TypedDocumentString(`
     `) as unknown as TypedDocumentString<GetSingleProductQuery, GetSingleProductQueryVariables>;
 export const ProductsGetAllPaginatedDocument = new TypedDocumentString(`
     query ProductsGetAllPaginated($skip: Int!, $first: Int!) {
-  products(skip: $skip, first: $first) {
+  products(skip: $skip, first: $first, orderBy: price_DESC) {
     id
     name
     price
@@ -10960,6 +10968,22 @@ export const ProductsGetAllPaginatedDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetAllPaginatedQuery, ProductsGetAllPaginatedQueryVariables>;
+export const ProductsGetAllPaginatedAscDocument = new TypedDocumentString(`
+    query ProductsGetAllPaginatedAsc($skip: Int!, $first: Int!) {
+  products(skip: $skip, first: $first, orderBy: price_ASC) {
+    id
+    name
+    price
+    description
+    categories {
+      name
+    }
+    images {
+      url
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetAllPaginatedAscQuery, ProductsGetAllPaginatedAscQueryVariables>;
 export const ProductsByNameDocument = new TypedDocumentString(`
     query ProductsByName($name: String!) {
   products(where: {name_contains: $name}) {

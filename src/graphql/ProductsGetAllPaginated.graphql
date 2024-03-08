@@ -1,5 +1,5 @@
 query ProductsGetAllPaginated($skip: Int!, $first: Int!) {
-	products(skip: $skip, first: $first) {
+	products(skip: $skip, first: $first,orderBy: price_DESC) {
 		id
 		name
 		price

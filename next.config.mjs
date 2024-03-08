@@ -5,7 +5,6 @@ const nextConfig = {
 		domains: ["naszsklep-api.vercel.app", "media.graphassets.com"],
 	},
 	experimental: {
-		typedRoutes: true,
 		serverActions: true,
 	},
 };
